@@ -28,12 +28,28 @@ export const isUserLoggedIn = () => {
 	});
 }
 
-// 
-// @params childObj: String, data: {...}
+export const getLoggedInUserRef = () => {
+	if (isUserLoggedIn) {
+		console.log('authed')
+		const rootRef = db.ref();
+	    const uid = localStorage.getItem(storageKey)
+	    return rootRef.child("users/" + uid);
+	} else {
+		console.log('not authed')
+		return null
+	}
+}
+
+// @params: 
+// 		childObj: String, 
+// 		data: {...},
+// 		useKey: String
 // @return Promise
+
 // takes an object and will write that data object to the firebase db 
 // under /users with the uid of the current user
-export const writeUserData = (childObj, data) => {
+// use key will add a unique key as a parent object around the data you pass in
+export const writeUserData = (childObj, data, useKey) => {
 	console.log('currentUser ', auth.currentUser)
 	if (auth.currentUser) {
 		const rootRef = db.ref();
@@ -41,14 +57,21 @@ export const writeUserData = (childObj, data) => {
 	    const userRef = rootRef.child("users/" + uid);
 	    // const newWalletKey = userRef.child(childObj).push().key
 	    // userRef.child(childObj).update(data);
-
-	    const newWalletKey = userRef.child(childObj).push().key
-	    const updates = {}
-	    updates[`/users/${uid}/${childObj}/${newWalletKey}`] = data
-
-	    rootRef.update(updates)
-	    .then(() => console.log('data updated'))
-	    .catch(e => console.log('An error occurred', e.message))
+	    if (useKey) {
+		    const newWalletKey = userRef.child(childObj).push().key
+		    const updates = {}
+		    updates[`/users/${uid}/${childObj}/${newWalletKey}`] = data
+		    rootRef.update(updates)
+		    .then(() => console.log('data updated'))
+		    .catch(e => console.log('An error occurred', e.message))
+		} else {
+			const newWalletKey = userRef.child(childObj)
+		    const updates = {}
+		    updates[`/users/${uid}/${childObj}`] = data
+		    rootRef.update(updates)
+		    .then(() => console.log('data updated'))
+		    .catch(e => console.log('An error occurred', e.message))
+		}
 	}
 }
 
