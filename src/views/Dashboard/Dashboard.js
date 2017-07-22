@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import { db, auth, isAuthenticated, writeUserData, removeUserData, isUserLoggedIn, getLoggedInUserRef } from '../../firebase';
 import * as firebase from 'firebase';
 
-import Card from '../../components/Card'
+// import Card from '../../components/Card'
+import CardContainer from '../../components/Card/CardContainer'
 import StackedAreaChart from '../../components/StackedAreaChart'
 import ModalGroup from '../../components/ModalGroup'
+import StepZilla from 'react-stepzilla'
+
 
 import constants from '../../utils/constants'
 
@@ -184,31 +187,42 @@ const cardChartOpts4 = {
 }
 
 
-
 class Dashboard extends Component {
 
   constructor(props) {
     super(props);
 
     this.toggle = this.toggle.bind(this);
-    this.handleWriteData = this.handleWriteData.bind(this);
-    this.handleRemoveData = this.handleRemoveData.bind(this);
+    // this.handleWriteData = this.handleWriteData.bind(this);
+    // this.handleRemoveData = this.handleRemoveData.bind(this);
     this.state = {
       dropdownOpen: false,
-      setupFinished: false,
+      setupFinished: true,
       firebase: 'hello world',
+      walletData: ''
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     // *** show the setup wizard when page loads and the user has not finished it ***
-    console.log(getLoggedInUserRef(), 'getLoggedInUserRef')
+    // console.log(getLoggedInUserRef(), 'getLoggedInUserRef')
     if (getLoggedInUserRef()) {
         getLoggedInUserRef().child('setupFinished').on('value', snap => {
         console.log('setupFinished value ', snap.val())
-        this.setState({ setupFinished: snap.val().setupFinished })
+        if (snap.val()) {
+          this.setState({ setupFinished: snap.val()})
+        }
       }) 
     }
+
+    // if (getLoggedInUserRef) {
+    //   getLoggedInUserRef().child('walletData').on('value', snap => {
+    //     console.log('walletData value ', snap.val())
+    //     if (snap.val()) {
+    //       this.setState({ walletData: snap.val() })
+    //     } 
+    //   })
+    // }
     // const rootRef = firebase.database().ref();
     // const dataRef = rootRef.child('test')
     // dataRef.on('value', snap => {
@@ -227,50 +241,43 @@ class Dashboard extends Component {
     });
   }
 
-  handleWriteData() {
-    console.log('in write data')
-    if (isUserLoggedIn) {
-      writeUserData("walletData", { address: '123xyz', type: constants.coinTypes.BTC }, true)
-    }
-  }
+  // handleWriteData() {
+  //   console.log('in write data')
+  //   if (isUserLoggedIn) {
+  //     writeUserData("walletData", { address: '123xyz', type: constants.coinTypes.BTC, displayName: 'test123' }, true)
+  //   }
+  // }
 
-  handleRemoveData() {
-    console.log('in write data')
-    if (isUserLoggedIn) {
-      removeUserData("/walletData/-KpCaAENMZ5FVBH8BIb6")
-    }
-  }
+  // handleRemoveData() {
+  //   console.log('in write data')
+  //   if (isUserLoggedIn) {
+  //     removeUserData("/walletData/-KpCaAENMZ5FVBH8BIb6")
+  //   }
+  // }
 
 
   render() {
     return (
       <div className="animated fadeIn">
         
-      <ModalGroup />
-
-        <button
+        <ModalGroup open={!this.state.setupFinished} />
+        
+        {/*<button
           onClick={() => { this.handleWriteData() }} className="btn btn-primary">
           Update
         </button>
         <button 
           onClick={() => { this.handleRemoveData() }} className="btn btn-primary">
           Remove
-        </button>
+        </button>*/}
+
 
         <StackedAreaChart />
 
 
-        <div className="row">
-            <Card color="red" />
-            <Card color="yellow" />
-            <Card color="yellow" />
-        </div>
-
-
-
-
-
-
+        
+        <CardContainer walletData={this.state.walletData} />
+        
       </div>
     )
   }

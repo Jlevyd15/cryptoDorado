@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Card = ({ color }) => {
+const Card = ({ color, fiatAmount, coinAmount, coinType, displayName, address, addCardStyle, addCard, removeCard, cardId }) => {
 	const cardColorMap = {
 		red: 'card-danger',
 		yellow: 'card-warning',
@@ -9,34 +9,48 @@ const Card = ({ color }) => {
 	}
 
 	return (
+
 	  	<div className="col-sm-6 col-lg-3">
-			<div className={`card card-inverse ${cardColorMap[color] || cardColorMap['primary']}`}>
-			  <div className="card-block pb-0">
-				{/*<div className="btn-group float-right">
-				  <Dropdown isOpen={this.state.card4} toggle={() => { this.setState({ card4: !this.state.card4 }); }}>
-					<button onClick={() => { this.setState({ card4: !this.state.card4 }); }} className="btn btn-transparent active dropdown-toggle p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded={this.state.card4}>
-					  <i className="icon-settings"></i>
+			{!addCardStyle ? 
+				<div className={`card card-inverse ${cardColorMap[color] || cardColorMap['primary']}`}>
+				  <div className="card-block pb-0">
+					<div className="btn-group float-right">
+						<button className="btn btn-transparent active p-0" onClick={() => removeCard(cardId)}>
+							<i className="fa fa-trash-o fa-lg"></i>
+						</button>
+					</div>
+					<h4 className="mb-0">${fiatAmount}</h4>
+					<div className="d-flex align-items-baseline">
+						<h4 className="mb-0">{coinAmount}</h4>
+						<small>&nbsp;{coinType}</small>
+					</div>
+					<p>{displayName}</p>
+					<div id={address} className="d-none" />
+				  </div>
+				</div>
+				:
+				<div className={`card card-inverse ${cardColorMap[color] || cardColorMap['primary']}`}>
+					<button className="btn btn-transparent active p-0" onClick={() => addCard()}>
+					  <i className="fa fa-plus-square-o fa-lg mt-4"></i>
+					  <p>add wallet</p>
 					</button>
-					<DropdownMenu>
-					  <DropdownItem>Action</DropdownItem>
-					  <DropdownItem>Another action</DropdownItem>
-					  <DropdownItem>Something else here</DropdownItem>
-					</DropdownMenu>
-				  </Dropdown>
-				</div>*/}
-				<h4 className="mb-0">9.823</h4>
-				<p>Members online</p>
-			  </div>
-			  {/*<div className="chart-wrapper px-3">
-				<Bar data={cardChartData4} options={cardChartOpts4} height={70}/>
-			  </div>*/}
-			</div>
+				</div>
+			}
 		</div>
 	)
 }
 
 Card.propTypes = {
-	color: React.PropTypes.string
+	cardId: React.PropTypes.string,
+	color: React.PropTypes.string,
+	fiatAmount: React.PropTypes.number,
+	coinAmount: React.PropTypes.number,
+	coinType: React.PropTypes.string,
+	displayName: React.PropTypes.string,
+	address: React.PropTypes.string,
+	addCardStyle: React.PropTypes.string,
+	addCard: React.PropTypes.func,
+	removeCard: React.PropTypes.func,
 }
 
 export default Card;

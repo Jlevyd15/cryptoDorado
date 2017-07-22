@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
+import { Provider } from 'react-redux';
+import Store from './store';
 
 import App from './App'
 
@@ -16,10 +18,14 @@ import App from './App'
 
 const history = createBrowserHistory();
 
+const StoreInstance = Store();
+
 ReactDOM.render(
-  <App />,
+  <Provider store={StoreInstance}>
+    <App />
+  </Provider>,
   document.getElementById('root')
-)
+);
 
 {/*<HashRouter history={history}>
     <Switch>

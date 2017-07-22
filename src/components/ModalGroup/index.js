@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { writeUserData, isUserLoggedIn} from '../../firebase';
+import { connect } from 'react-redux'
+
+import StepZilla from 'react-stepzilla'
+import * as styles from './style.css'
 
 
 
@@ -122,22 +126,36 @@ class ModalGroup extends Component {
       </div>
     )
 
+    const setupWizardData =
+      [
+        {name: 'Step 1', component: firstStepContent},
+        {name: 'Step 2', component: secondStepContent},
+      ]
+
+    console.log(this.props.open)
     return (
       <div className="animated fadeIn">
         <Button color="primary" onClick={this.toggle}>Wizard</Button>
-          <Modal isOpen={this.state.modal} toggle={this.toggle} className={'modal-primary ' + this.props.className}>
+          <Modal isOpen={this.props.open} toggle={this.toggle} className={'modal-primary ' + this.props.className}>
             <ModalHeader toggle={this.toggle}>Let's get setup</ModalHeader>
             <ModalBody>
-              {this.state.firstStepFinished ? secondStepContent : firstStepContent}
+              {/*this.state.firstStepFinished ? secondStepContent : firstStepContent)*/}
+              <div className="step-progress">
+                <StepZilla steps={setupWizardData} dontValidate={true} />
+              </div>
             </ModalBody>
-            <ModalFooter>
+            {/*<ModalFooter>
               <Button color="secondary" onClick={this.toggle}>Back</Button>
               <Button color="primary" onClick={this.handleContinueBtn}>Continue</Button>{' '}
-            </ModalFooter>
+            </ModalFooter>*/}
           </Modal>
       </div>
     )
   }
+}
+
+ModalGroup.propTypes = {
+  open: React.PropTypes.string
 }
 
 export default ModalGroup;

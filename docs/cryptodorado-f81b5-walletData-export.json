@@ -1,0 +1,17 @@
+{
+  "-KpBjUw-lLfjmTLzhYNf" : {
+    "address" : "123xyz",
+    "displayName" : "CoinBase Eth",
+    "type" : "ETH"
+  },
+  "-KpfE3xrKkkw_KynboOt" : {
+    "address" : "123xyz",
+    "displayName" : "xyz coin",
+    "type" : "BTC"
+  },
+  "-KpfE4MUv7gF1_RmxcVe" : {
+    "address" : "123xyz",
+    "displayName" : "abc coin",
+    "type" : "BTC"
+  }
+}

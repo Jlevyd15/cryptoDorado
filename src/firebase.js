@@ -19,9 +19,10 @@ export const isAuthenticated = () => {
 }
 
 export const isUserLoggedIn = () => {
-	auth.onAuthStateChanged(function(user) {
+	auth.onAuthStateChanged(user => {
+		console.log('user', user.uid)
 	  	if (user) {
-			return true
+			return user.uid
 		} else {
 			return false
 		}
@@ -30,7 +31,7 @@ export const isUserLoggedIn = () => {
 
 export const getLoggedInUserRef = () => {
 	if (isUserLoggedIn) {
-		console.log('authed')
+		console.log('authed', isUserLoggedIn())
 		const rootRef = db.ref();
 	    const uid = localStorage.getItem(storageKey)
 	    return rootRef.child("users/" + uid);
