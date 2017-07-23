@@ -6,7 +6,7 @@ import Breadcrumb from '../../components/Breadcrumb/';
 import Aside from '../../components/Aside/';
 import Footer from '../../components/Footer/';
 
-import Dashboard from '../../views/Dashboard/'
+import Dashboard from '../../views/Pages/Dashboard/'
 import Charts from '../../views/Charts/'
 import Widgets from '../../views/Widgets/'
 import Buttons from '../../views/Components/Buttons/'
@@ -30,9 +30,9 @@ class Full extends Component {
           <main className="main">
             <Breadcrumb />
             <div className="container-fluid">
-              <Switch>
+              {/*<Switch>
                 <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
-                <Route path="/components/buttons" name="Buttons" component={Buttons}/>
+                {/*<Route path="/components/buttons" name="Buttons" component={Buttons}/>
                 <Route path="/components/cards" name="Cards" component={Cards}/>
                 <Route path="/components/forms" name="Forms" component={Forms}/>
                 <Route path="/components/modals" name="Modals" component={Modals}/>
@@ -45,10 +45,11 @@ class Full extends Component {
                 <Route path="/widgets" name="Widgets" component={Widgets}/>
                 <Route path="/charts" name="Charts" component={Charts}/>
                 <Redirect from="/" to="/dashboard"/>
-              </Switch>
+              </Switch>*/}
+              <Dashboard />
             </div>
           </main>
-          <Aside />
+          {/*<Aside />*/}
         </div>
         <Footer />
       </div>

@@ -11,6 +11,8 @@ import Login from './views/Pages/Login/'
 import Register from './views/Pages/Register/'
 import Page404 from './views/Pages/Page404/'
 import Page500 from './views/Pages/Page500/'
+import Dashboard from './views/Pages/Dashboard/'
+
 
 class App extends Component {
   state = {
@@ -46,11 +48,13 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
+          {/*<Route exact path="/" component={LANDING PAGE COMPONENT HERE} />*/}
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register}/>
           <Route exact path="/404" name="Page 404" component={Page404}/>
           <Route exact path="/500" name="Page 500" component={Page500}/>
-          <MatchWhenAuthorized path="/" name="Home" component={Full}/>
+          <MatchWhenAuthorized path="/dashboard" name="Home" component={Full}/>
+          {/*<MatchWhenAuthorized path="/days" component={DayForm} />*/}
           {/*<MatchWhenAuthorized path="/days" component={DayForm} />*/}
         </Switch>
       </BrowserRouter>

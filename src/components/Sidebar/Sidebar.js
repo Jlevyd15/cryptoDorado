@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom'
 
+//actions
+import { modal } from '../../actions';
+
+//utils
+import config from '../../utils/projectConfig';
+
 class Sidebar extends Component {
+  constructor(props) {
+    super();
+    this.openSetupWizard = this.openSetupWizard.bind(this);
+  }
 
   handleClick(e) {
     e.preventDefault();
@@ -16,18 +27,28 @@ class Sidebar extends Component {
   //   return this.props.location.pathname.indexOf(routeName) > -1 ? "nav nav-second-level collapse in" : "nav nav-second-level collapse";
   // }
 
+  openSetupWizard() {
+    this.props.openSetupWizard()
+  }
+
   render() {
     return (
       <div className="sidebar">
         <nav className="sidebar-nav">
           <ul className="nav">
             <li className="nav-item">
-              <NavLink to={'/dashboard'} className="nav-link" activeClassName="active"><i className="icon-speedometer"></i> Dashboard <span className="badge badge-info">NEW</span></NavLink>
+              <NavLink to={'/dashboard'} className="nav-link" activeClassName="active"><i className="icon-speedometer"></i> Dashboard</NavLink>
             </li>
-            <li className="nav-title">
-              UI Elements
+
+            <li className="nav-title">Settings</li>
+
+            <li className="nav-item">
+              <a onClick={() => this.openSetupWizard()} ><div className="nav-link" activeClassName="active"><i className="icon-magic-wand"></i> Setup Wizard</div></a>
             </li>
-            <li className={this.activeRoute("/components")}>
+            {/*<li className={this.activeRoute("/components")}>
+              <li className="nav-item">
+                    <NavLink to={'/components/buttons'} className="nav-link" activeClassName="active"><i className="icon-puzzle"></i> NavLink</NavLink>
+              </li>
               <a className="nav-link nav-dropdown-toggle" href="#" onClick={this.handleClick.bind(this)}><i className="icon-puzzle"></i> Components</a>
               <ul className="nav-dropdown-items">
                 <li className="nav-item">
@@ -93,7 +114,7 @@ class Sidebar extends Component {
                   <NavLink to={'/500'} className="nav-link" activeClassName="active"><i className="icon-star"></i> Error 500</NavLink>
                 </li>
               </ul>
-            </li>
+            </li>*/}
           </ul>
         </nav>
       </div>
@@ -101,4 +122,13 @@ class Sidebar extends Component {
   }
 }
 
-export default Sidebar;
+Sidebar.propTypes = {
+  openSetupWizard: React.PropTypes.func
+}
+
+
+const mapDispatchToProps = dispatch => ({
+  openSetupWizard: () => dispatch(modal.open(config.ids.modals.setup, true))
+})
+
+export default connect(null, mapDispatchToProps)(Sidebar);

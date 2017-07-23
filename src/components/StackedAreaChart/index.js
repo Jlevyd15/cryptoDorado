@@ -38,7 +38,7 @@ const StackedAreaChart = ({}) => {
 	}
 
 	const mainChart = {
-	  labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S'],
+	  labels: [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017,],
 	  datasets: [
 	    {
 	      label: 'My First dataset',
