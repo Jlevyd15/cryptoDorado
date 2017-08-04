@@ -50,7 +50,7 @@ export const getLoggedInUserRef = () => {
 // takes an object and will write that data object to the firebase db 
 // under /users with the uid of the current user
 // use key will add a unique key as a parent object around the data you pass in
-export const writeUserData = (childObj, data, useKey) => {
+export const updateUserData = (childObj, data, useKey) => {
 	console.log('currentUser ', auth.currentUser)
 	if (auth.currentUser) {
 		const rootRef = db.ref();
@@ -73,6 +73,29 @@ export const writeUserData = (childObj, data, useKey) => {
 		    .then(() => console.log('data updated'))
 		    .catch(e => console.log('An error occurred', e.message))
 		}
+	}
+}
+
+// @params: 
+// 		childObj: String, 
+// 		data: {...},
+// 		useKey: String
+// @return Promise
+
+// takes an object and will write that data object to the firebase db 
+// under /users with the uid of the current user
+// use key will add a unique key as a parent object around the data you pass in
+export const setUserData = (childObj, data) => {
+	console.log('currentUser ', auth.currentUser)
+	if (auth.currentUser) {
+		const rootRef = db.ref();
+	    const uid = localStorage.getItem(storageKey)
+	    const userRef = rootRef.child("users/" + uid);
+	  
+		const newWalletKey = userRef.child(childObj)
+		.set(data)
+	    .then(() => console.log('data updated'))
+	    .catch(e => console.log('An error occurred', e.message))
 	}
 }
 

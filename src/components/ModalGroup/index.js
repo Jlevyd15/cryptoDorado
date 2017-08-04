@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import { writeUserData, isUserLoggedIn} from '../../firebase';
+import { updateUserData, isUserLoggedIn} from '../../firebase';
 import { connect } from 'react-redux'
 
 import * as styles from './style.css'
@@ -50,7 +50,7 @@ class ModalGroup extends Component {
       })
       if (isUserLoggedIn) {
         // TODO - only write this to the DB once. 
-        writeUserData('/setupFinished', { setupFinished: true })
+        updateUserData('/setupFinished', { setupFinished: true })
       }
     }
   }

@@ -2930,6 +2930,22 @@ tbody.collapse.show {
   .card-primary .card-footer {
     background-color: transparent; }
 
+.card-disabled {
+  background-color: #ABB2B9;
+  border-color: #ABB2B9; }
+  .card-primary .card-header,
+  .card-primary .card-footer {
+    background-color: transparent; }
+  .card-disabled-text {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: red;
+    font-style: bold;
+    -ms-transform: rotate(-10deg); /* IE 9 */
+    -webkit-transform: rotate(-10deg); /* Chrome, Safari, Opera */
+    transform: rotate(-10deg); }
+
 .card-success {
   background-color: #4dbd74;
   border-color: #4dbd74; }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { db, auth, writeUserData, removeUserData, isUserLoggedIn, getLoggedInUserRef } from '../../firebase';
+import { db, auth, setUserData, updateUserData, removeUserData, isUserLoggedIn, getLoggedInUserRef } from '../../firebase';
 
 //utils
 import config from '../../utils/projectConfig';
@@ -23,8 +23,11 @@ class CardContainer extends React.Component {
 		this.handleAddCard = this.handleAddCard.bind(this);
     	this.handleRemoveCard = this.handleRemoveCard.bind(this);
     	this.confirmRemoveCallback = this.confirmRemoveCallback.bind(this);
+    	this.handleToggleCoinCard = this.handleToggleCoinCard.bind(this);
+    	this.getDropdownId = this.getDropdownId.bind(this);
 		this.state = {
-			walletData: ''
+			walletData: '',
+			dropdownState: false
 		}
 	}
 
@@ -59,37 +62,38 @@ class CardContainer extends React.Component {
 	    
     }
 
-    // shouldComponentUpdate() {
-    // 	console.log('should update')
-    // 	// if (getLoggedInUserRef()) {
-	   //  //     getLoggedInUserRef().child('walletData').on('value', snap => {
-	   //  //     console.log('walletData value ', snap.val())
-	   //  //     if (snap.val()) {
-	   //  //       this.setState({ walletData: snap.val() })
-	   //  //     } else {
-	   //  //     	// CardContainer.forceUpdate()
-	   //  //     	console.log('no data force update')
-	   //  //     }
-	   //  //   })
-	   //  // } else {
-	   //  // 	console.log('not logged in')
-	   //  // }
-    // }
-
   	handleAddCard() {
 	    console.log('in write data')
 	    if (isUserLoggedIn) {
-	      writeUserData("walletData", { address: '123xyz', type: constants.coinTypes.BTC, displayName: 'test123' }, true)
+	      updateUserData("walletData", { address: '123xyz', type: constants.coinTypes.BTC, displayName: 'test123' }, true)
 	    }
   	}
 
   	handleRemoveCard(id) {
 	    console.log('in write data')
 	  	// this.confirmRemoveCallback(id)
-	  	this.props.openModal({ id })
+	  	this.props.openModal(this.props.modalId, { id })
 	}
 
-  	getCardColor(type) {
+	// handleHideCoinCard(id) {
+	//     console.log('in write data')
+	//   	// this.confirmRemoveCallback(id)
+	//   	updateUserData("walletData", { address: '123xyz', type: constants.coinTypes.BTC, displayName: 'test123' }, true)
+	// }
+
+	handleToggleCoinCard(id, cardDisabled) {	
+  		// this.setState({ dropdownState: !this.state.dropdownState })
+  		// this.props.openModal(id)
+  		console.log('in toggle coin card', id, cardDisabled)
+  		updateUserData(`walletData/${id}/hidden`, !cardDisabled)
+  	}
+
+
+
+  	getCardColor(type, cardHidden) {
+  		if (cardHidden === true) {
+  			return 'disabled'
+  		}
   		switch(type) {
   			case 'ETH':
   				return 'primary'
@@ -101,15 +105,30 @@ class CardContainer extends React.Component {
   	}
 
   	getFiatAmount() {
-  		console.log('test')
+  		console.log('test');
   	}
 
   	confirmRemoveCallback(data) {
   		const { id } = data
   		if (isUserLoggedIn) {
 	      removeUserData("/walletData/" + id)
-	      this.props.closeModal()
+	      this.props.closeModal(this.props.modalId)
 	    }
+  	}
+
+  	getDropdownId(coinType) {
+  		console.log(coinType)
+  		switch(coinType) {
+  			case 'ETH':
+  				return config.ids.dropdowns.ethCard
+			case 'BTC':
+  				return config.ids.dropdowns.btcCard
+			case 'LTC':
+  				return config.ids.dropdowns.ltcCard
+			default:
+				return 
+					config.ids.dropdowns.ethCard
+  		}
   	}
 
 	render() {
@@ -118,11 +137,11 @@ class CardContainer extends React.Component {
 			const { walletData } = this.state
 			const renderedList = []
 	  		for (const key in walletData) {
-	  			console.log(walletData[key])
+	  			// console.log(walletData[key])
 				renderedList.push(
 					<Card 
 						key={key}
-						color={this.getCardColor(walletData[key].type)}
+						color={this.getCardColor(walletData[key].type, walletData[key].hidden)}
 						fiatAmount={1000}
 						coinAmount={10}
 						coinType={walletData[key].type}
@@ -130,6 +149,9 @@ class CardContainer extends React.Component {
 						address={walletData[key].address}
 						removeCard={this.handleRemoveCard}
 						cardId={key}
+						toggleCoinCard={this.handleToggleCoinCard}
+						dropdownId={this.getDropdownId(walletData[key].type)}
+						cardDisabled={walletData[key].hidden}
 					/>
 				)
 			}
@@ -160,10 +182,10 @@ class CardContainer extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-console.log('ownProps', ownProps)
+// console.log('ownProps', ownProps)
 return ({
-  openModal: data => dispatch(modal.open(ownProps.modalId, true, data)),
-  closeModal: () => dispatch(modal.close(ownProps.modalId, false))
+  openModal: (modalId, data) => dispatch(modal.open(modalId, true, data)),
+  closeModal: modalId => dispatch(modal.close(modalId, false))
 })}
 
 export default connect(null, mapDispatchToProps)(CardContainer);

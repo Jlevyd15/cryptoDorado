@@ -1,5 +1,7 @@
-
-
-.small-text {
-	display: inline;
+span.coin-icon svg {
+	z-index: 1;
+	fill: white;
+	position: absolute;
+	opacity: 0.3;
+	padding: 5px;
 }

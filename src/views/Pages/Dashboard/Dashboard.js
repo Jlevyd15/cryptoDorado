@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { db, auth, isAuthenticated, writeUserData, removeUserData, isUserLoggedIn, getLoggedInUserRef } from '../../../firebase';
+import { db, auth, isAuthenticated, updateUserData, removeUserData, isUserLoggedIn, getLoggedInUserRef } from '../../../firebase';
 import * as firebase from 'firebase';
 
 // import Card from '../../components/Card'
@@ -56,7 +56,7 @@ class Dashboard extends Component {
     //   })
     // })
     // if (isUserLoggedIn) {
-    //   writeUserData("walletData", { address: '123xyz', type: constants.coinTypes.BTC })
+    //   updateUserData("walletData", { address: '123xyz', type: constants.coinTypes.BTC })
     // }
   }
 
