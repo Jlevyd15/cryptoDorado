@@ -11,6 +11,7 @@ import StepZilla from 'react-stepzilla'
 //utils
 import config from '../../../utils/projectConfig';
 import constants from '../../../utils/constants';
+import * as setupWizardContent from './setupWizardContent'
 
 class Dashboard extends Component {
 
@@ -86,80 +87,16 @@ class Dashboard extends Component {
 
 
   render() {
-    const firstStepContent = (
-      <div className="animated fadeIn">
-        <p>This is the first step content</p>
-        <div className="card">
-          <div className="card-header">
-            <strong>ETH Wallet Address Setup</strong>
-          </div>
-          <div className="card-block">
-            <div className="row">
-              <div className="col-sm-12">
-                <div className="form-group">
-                  <label htmlFor="walletAddress">Wallet Address</label>
-                  <input type="text" className="form-control" id="walletAddress" placeholder="ETH wallet address here"/>
-                </div>
-              </div>
-            </div>
 
-            <div className="row">
-              <div className="form-group col-sm-6">
-                <label htmlFor="ccmonth">Month</label>
-                <select className="form-control" id="ccmonth">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  <option>7</option>
-                  <option>8</option>
-                  <option>9</option>
-                  <option>10</option>
-                  <option>11</option>
-                  <option>12</option>
-                </select>
-              </div>
-              <div className="form-group col-sm-6">
-                <label htmlFor="ccyear">Year</label>
-                <select className="form-control" id="ccyear">
-                  <option>2014</option>
-                  <option>2015</option>
-                  <option>2016</option>
-                  <option>2017</option>
-                  <option>2018</option>
-                  <option>2019</option>
-                  <option>2020</option>
-                  <option>2021</option>
-                  <option>2022</option>
-                  <option>2023</option>
-                  <option>2024</option>
-                  <option>2025</option>
-                </select>
-              </div>
-              {/*<div className="col-sm-4">
-                <div className="form-group">
-                  <label htmlFor="cvv">CVV/CVC</label>
-                  <input type="text" className="form-control" id="cvv" placeholder="123"/>
-                </div>
-              </div>*/}
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-
-    const secondStepContent = (
-      <div className="animated fadeIn">
-        <p>This is the second step content</p>
-      </div>
-    )
 
     const setupWizardData =
       [
-        {name: 'Step 1', component: firstStepContent},
-        {name: 'Step 2', component: secondStepContent},
+        {name: 'Step 1', component: setupWizardContent.firstStepContent},
+        {name: 'Step 2', component: setupWizardContent.secondStepContent},
+        {name: 'Step 3', component: setupWizardContent.thirdStepContent},
+        {name: 'Step 4', component: setupWizardContent.fourthStepContent},
+        {name: 'Step 5', component: setupWizardContent.firthStepContent},
+        {name: 'Step 6', component: setupWizardContent.sixthStepContent},
       ]
 
     const setupModalBody = (
