@@ -1,5 +1,5 @@
 // actions
-import { MODAL_OPEN, MODAL_CLOSE, UPDATE_FIELD } from './actionTypes' 
+import { MODAL_OPEN, MODAL_CLOSE, UPDATE_FIELD, TOGGLE_CARD } from './actionTypes' 
 
 
 export const modal = {
@@ -9,4 +9,8 @@ export const modal = {
 
 export const fields = {
 	open: (id, value) => { type: UPDATE_FIELD, id, value }
+}
+
+export const card = {
+	toggle: id => ({ type: TOGGLE_CARD, id })
 }

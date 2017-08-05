@@ -51,7 +51,7 @@ export const getLoggedInUserRef = () => {
 // under /users with the uid of the current user
 // use key will add a unique key as a parent object around the data you pass in
 export const updateUserData = (childObj, data, useKey) => {
-	console.log('currentUser ', auth.currentUser)
+	// console.log('currentUser ', auth.currentUser)
 	if (auth.currentUser) {
 		const rootRef = db.ref();
 	    const uid = localStorage.getItem(storageKey)
@@ -86,7 +86,7 @@ export const updateUserData = (childObj, data, useKey) => {
 // under /users with the uid of the current user
 // use key will add a unique key as a parent object around the data you pass in
 export const setUserData = (childObj, data) => {
-	console.log('currentUser ', auth.currentUser)
+	// console.log('currentUser ', auth.currentUser)
 	if (auth.currentUser) {
 		const rootRef = db.ref();
 	    const uid = localStorage.getItem(storageKey)
@@ -103,7 +103,7 @@ export const setUserData = (childObj, data) => {
 
 // pass a string like (/walletData/walletkey)
 export const removeUserData = location => {
-	console.log('currentUser ', auth.currentUser)
+	// console.log('currentUser ', auth.currentUser)
 	if (auth.currentUser) {
 		const rootRef = db.ref();
 	    const uid = localStorage.getItem(storageKey)

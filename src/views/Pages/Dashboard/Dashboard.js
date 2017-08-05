@@ -40,6 +40,24 @@ class Dashboard extends Component {
       }) 
     }
 
+    
+    auth.onAuthStateChanged(user => {
+       // console.log('user', user.uid)
+       if (user) {
+       // console.log('user id', user.uid)
+         db.ref().child('users/' + user.uid)
+           .child('walletData')
+           .on('value', snap => {
+             console.log(snap.val())
+             if (snap.val()) {
+               this.setState({ walletData: snap.val() })
+             }
+           })
+       } else {
+         return false
+       }
+     });
+
     // if (getLoggedInUserRef) {
     //   getLoggedInUserRef().child('walletData').on('value', snap => {
     //     console.log('walletData value ', snap.val())
@@ -160,9 +178,7 @@ class Dashboard extends Component {
           headerContent={config.messages.setupModalHeader}
         />
 
-        <StackedAreaChart />
-
-        <CardContainer walletData={this.state.walletData} modalId={config.ids.modals.confirm} />
+        <StackedAreaChart walletData={this.state.walletData} />
         
       </div>
     )

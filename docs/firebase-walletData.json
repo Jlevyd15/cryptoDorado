@@ -1,0 +1,22 @@
+{
+  "walletData" : {
+    "-KpBiqsRpkeoqG1koxLM" : {
+      "address" : "123xyz",
+      "hidden" : false,
+      "type" : "ETH",
+      "data": [163, 203, 276, 408, 547, 729, 628]
+    },
+    "-KpBprqVaNsl87873WjH" : {
+      "address" : "123xyz",
+      "type" : "BTC",
+      "hidden": false,
+      "data": [502, 635, 809, 947, 1402, 3634, 5268]
+    },
+    "-KpgpkOy0H-3D1K34kO0" : {
+      "address" : "123xyz",
+      "type" : "LTC",
+      "hidden": false,
+      "data": [106, 107, 111, 133, 221, 767, 1766]
+    }
+  }
+}

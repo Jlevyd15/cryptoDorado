@@ -37,13 +37,13 @@ class ModalGroup extends Component {
   }
 
   handleContinueBtn() {
-    console.log('in continue btn  ')
+    // console.log('in continue btn  ')
     this.setState({
       firstStepFinished: true,
     });
 
     if (this.state.firstStepFinished) {
-      console.log('setup finished')
+      // console.log('setup finished')
       this.setState({
         setupFinished: true,
         modal: false
@@ -96,7 +96,7 @@ const mapStateToProps = (state, props) => ({
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-console.log('ownProps', ownProps)
+// console.log('ownProps', ownProps)
 return ({
   closeModal: () => dispatch(modal.close(ownProps.id, false))
 })}

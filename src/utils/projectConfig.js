@@ -6,10 +6,10 @@ const config = {
 			confirm: 'CONFIRM_MODAL',
 			addWallet: 'CONFIRM_MODAL',
 		},
-		dropdowns: {
-			ethCard: 'ETH_DROPDOWN',
-			ltcCard: 'LTC_DROPDOWN',
-			btcCard: 'BTC_DROPDOWN',
+		cards: {
+			BTC: 'BTC_CARD',
+			ETH: 'ETH_CARD',
+			LTC: 'LTC_CARD',
 		},
 		fields: {
 

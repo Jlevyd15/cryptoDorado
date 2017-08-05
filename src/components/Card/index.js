@@ -8,7 +8,7 @@ class Card extends React.Component {
 	constructor(props) {
 		super();
 		this.state = {
-			dropdownState: false
+			dropdownState: false,
 		}
 	}
 	render() {
@@ -37,7 +37,7 @@ class Card extends React.Component {
 			                      <i className="icon-settings"></i>
 			                    </button>
 			                    <DropdownMenu className="dropdown-menu-right">
-			                      <DropdownItem onClick={() => toggleCoinCard(cardId, cardDisabled)}>toggle coin</DropdownItem>
+			                      <DropdownItem onClick={() => toggleCoinCard(cardId, cardDisabled, coinType)}>toggle coin</DropdownItem>
 			                    </DropdownMenu>
 			                  </Dropdown>
 							{/*<button className="btn btn-transparent active p-0" onClick={() => removeCard(cardId)}>
@@ -82,4 +82,4 @@ Card.propTypes = {
 	dropdownId: React.PropTypes.string
 }
 
-export default Card;
+export default Card
