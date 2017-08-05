@@ -4,6 +4,8 @@ import { Dropdown, DropdownMenu, DropdownItem, Progress } from 'reactstrap';
 import CardContainer from '../Card/CardContainer';
 import ReactHighcharts from 'react-highcharts';
 
+import * as styles from './style.css'
+
 import { db, auth } from '../../firebase';
 
 import config from '../../utils/projectConfig';
@@ -223,12 +225,14 @@ class StackedAreaChart extends React.Component {
 		// }
 		return (
 			<div>
-		        <div className="card">
-		          <div className="card-block">
-		    		<ReactHighcharts config={this.getChartData()} ref="chart" isPureConfig={true} />
-		          </div>
+				{/*<div className="card">*/}
+	          	<div className="stacked-chart" >
+	    			<ReactHighcharts  config={this.getChartData()} ref="chart" isPureConfig={true} />
+    			</div>
+		       	{/*</div>*/}
+		       	<div className="container-fluid">
+		        	<CardContainer walletData={this.state.walletData} modalId={config.ids.modals.confirm} toggleChartData={this.toggleChatData} />
 		        </div>
-		        <CardContainer walletData={this.state.walletData} modalId={config.ids.modals.confirm} toggleChartData={this.toggleChatData} />
 	        </div>
 		)
 	}

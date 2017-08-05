@@ -29,7 +29,6 @@ class Full extends Component {
           <Sidebar {...this.props}/>
           <main className="main">
             <Breadcrumb />
-            <div className="container-fluid">
               {/*<Switch>
                 <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
                 {/*<Route path="/components/buttons" name="Buttons" component={Buttons}/>
@@ -47,7 +46,6 @@ class Full extends Component {
                 <Redirect from="/" to="/dashboard"/>
               </Switch>*/}
               <Dashboard />
-            </div>
           </main>
           {/*<Aside />*/}
         </div>
