@@ -6,6 +6,8 @@ import * as firebase from 'firebase';
 import CardContainer from '../../../components/Card/CardContainer'
 import StackedAreaChart from '../../../components/StackedAreaChart'
 import ModalGroup from '../../../components/ModalGroup'
+import Table from '../../../components/Table'
+import MetricsGroup from '../../../components/MetricsGroup'
 import StepZilla from 'react-stepzilla'
 
 //utils
@@ -115,6 +117,8 @@ class Dashboard extends Component {
           headerContent={config.messages.setupModalHeader}
         />
 
+        {/*<Table />*/}
+        <MetricsGroup />
         <StackedAreaChart walletData={this.state.walletData} />
         
       </div>

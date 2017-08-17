@@ -1,30 +1,36 @@
 import React from 'react';
-import { messages } from './messages';  
-
+import { messages } from './messages';
+import Popover from '../../../components/Popover';
+  
   export const firstStepContent = (
     <div className="animated fadeIn">
+      <Popover />
       <span dangerouslySetInnerHTML={{ __html: messages.firstStepContent }} />
     </div>
   )
   export const secondStepContent = (
     <div className="animated fadeIn">
+      <Popover />
       <span dangerouslySetInnerHTML={{ __html: messages.secondStepContent}} />
     </div>
   )
   export const thirdStepContent = (
     <div className="animated fadeIn">
+      <Popover />
       <span dangerouslySetInnerHTML={{ __html: messages.thirdStepContent}} />
       <img src="/img/setupWizard/checked_view.png" />
     </div>
   )
   export const fourthStepContent = (
     <div className="animated fadeIn">
+      <Popover />
       <span dangerouslySetInnerHTML={{ __html: messages.fourthStepContent}} />
       <img src="/img/setupWizard/passphrase_generate.png" />
     </div>
   )
   export const firthStepContent = (
     <div className="animated fadeIn">
+      <Popover />
      <span dangerouslySetInnerHTML={{ __html: messages.fithStepContent}} />
       <img src="/img/setupWizard/key_generated.png" />
     </div>
